@@ -49,25 +49,21 @@
             overflow: hidden;
         }
 
-        /* 🎯 頁面邊界精準保護，確保 A4 範圍內 100% 契合 */
+        /* 🎯 解鎖硬性限制：螢幕瀏覽時彈性自適應，徹底解決內容隱藏問題！ */
         .page { 
             position: relative;
             background: #fff;
-            padding: 30px 35px 12px 35px;
-            overflow: hidden;
+            padding: 30px 35px 20px 35px;
+            overflow: visible; /* 螢幕瀏覽時允許自然延伸 */
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            min-height: 1050px;
-            max-height: 1060px;
+            min-height: 980px; /* 改為彈性最小高度 */
             border-bottom: 2px dashed #e2e8f0;
-            page-break-after: always;
-            page-break-inside: avoid;
         }
 
         .page:last-child {
             border-bottom: none;
-            page-break-after: avoid;
         }
 
         .page-content {
@@ -143,6 +139,7 @@
             letter-spacing: 0.5px;
         }
 
+        /* 🎯 校標尺寸微調 */
         .logo-img {
             width: 100%;
             max-width: 130px;
@@ -249,12 +246,11 @@
             font-weight: 700;
         }
 
-        /* 🎯 表格容器保護，防止超出頁面 */
+        /* 🎯 表格容器保護 */
         .table-container {
             width: 100%;
             margin-top: 8px;
             margin-bottom: 10px;
-            page-break-inside: avoid;
         }
 
         table.ad-table { 
@@ -266,7 +262,6 @@
             border: 1px solid var(--border-color);
             border-radius: 6px;
             overflow: hidden;
-            page-break-inside: avoid;
         }
 
         table.ad-table th, table.ad-table td { 
@@ -301,7 +296,6 @@
             font-size: 13px;
             border: 1px solid var(--border-color);
             border-left-width: 4px;
-            page-break-inside: avoid;
         }
 
         .info-card {
@@ -311,7 +305,6 @@
             border-radius: 6px;
             margin-top: 6px;
             margin-bottom: 10px;
-            page-break-inside: avoid;
         }
 
         .note { 
@@ -333,22 +326,21 @@
             word-break: break-word;
         }
 
-        /* 🎯 頁尾圖片容器與高度嚴格鎖定 (防止推擠溢頁) */
+        /* 🎯 頁尾圖片容器與高度彈性鎖定 */
         .footer-image-box {
             width: calc(100% + 70px); 
             margin-left: -35px; 
-            margin-top: 6px;
+            margin-top: 10px;
             overflow: hidden;
             display: flex;
             justify-content: center;
             align-items: flex-end;
-            page-break-inside: avoid;
         }
 
         .page-footer-img {
             width: auto;
             max-width: 96%; 
-            max-height: 130px; /* 精準控制高度，確保 100% 不會卡出頁面邊界 */
+            max-height: 135px; 
             object-fit: contain;
             display: block;
             margin: 0 auto;
@@ -359,13 +351,12 @@
         .last-page-footer-box {
             width: calc(100% + 70px);
             margin-left: -35px;
-            margin-top: 6px;
+            margin-top: 10px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: flex-end;
-            gap: 8px; 
-            page-break-inside: avoid;
+            gap: 10px; 
         }
 
         .join-us-btn-container {
@@ -391,7 +382,7 @@
             filter: drop-shadow(0 5px 10px rgba(0,0,0,0.2));
         }
 
-        /* 🖨️ 列印防護：進行 A4 紙張列印時自動展開全文字與圖檔安全邊界 */
+        /* 🖨️ 列印專用防護罩：只有在「真正列印紙張」時才精準鎖定 A4 尺寸！ */
         @media print {
             body { background-color: #fff; padding: 0; margin: 0; }
             .ad-container { max-width: 100%; width: 100%; box-shadow: none; border-radius: 0; }
@@ -405,7 +396,7 @@
                 padding: 15mm 18mm 0 18mm !important; 
                 margin: 0;
                 border-bottom: none;
-                overflow: hidden;
+                overflow: hidden !important; /* 列印時鎖定邊界 */
             }
             .page:last-child { page-break-after: avoid; }
             .description-scroll-box { max-height: none !important; overflow-y: visible !important; border: none !important; padding: 0 !important; }
@@ -416,12 +407,15 @@
             .last-page-footer-box { width: calc(100% + 36mm) !important; margin-left: -18mm !important; }
             .page-footer-img { max-height: 120px !important; }
             .join-us-btn-container { display: none !important; }
+            table.ad-table, .info-card, .grammar-section, .footer-image-box, .last-page-footer-box {
+                page-break-inside: avoid;
+            }
         }
 
         @media (max-width: 768px) {
             body { padding: 0; }
             .ad-container { border-radius: 0; box-shadow: none; }
-            .page { padding: 20px 15px 0 15px; min-height: auto; max-height: none; }
+            .page { padding: 20px 15px 15px 15px; min-height: auto; }
             .header-flex-box { padding: 15px 18px; flex-direction: column-reverse; text-align: center; }
             .title-group { text-align: center; width: 100%; }
             .logo-img { max-width: 110px; margin-bottom: 8px; }
@@ -455,7 +449,7 @@
 
             <h2 class="section-heading">💡 課程理念 | Course Concept</h2>
             
-            <!-- 📜 動態捲動卡片升級區塊（100% 鎖定第一頁空間） -->
+            <!-- 📜 動態捲動卡片升級區塊（完美兼顧畫面與滾動） -->
             <div class="description-scroll-box">
                 <span class="scroll-tip-badge">📜 滾動滑鼠或上下滑動閱讀 (Scroll)</span>
                 <p class="paragraph-desc" style="font-size: 13.5px; color: var(--uci-blue); font-weight: 700; margin-bottom: 6px;">

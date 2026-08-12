@@ -49,7 +49,7 @@
             overflow: hidden;
         }
 
-        /* 🎯 解鎖硬性限制：螢幕瀏覽時彈性自適應，徹底解決內容隱藏問題！ */
+        /* 🎯 螢幕瀏覽彈性自適應，徹底解決內容隱藏問題！ */
         .page { 
             position: relative;
             background: #fff;
@@ -246,11 +246,12 @@
             font-weight: 700;
         }
 
-        /* 🎯 表格容器保護 */
+        /* 🎯 表格容器保護與全邊框重構防裁切晶片 */
         .table-container {
             width: 100%;
             margin-top: 8px;
             margin-bottom: 10px;
+            padding: 1px; /* 預留 1px 避免邊框被裁切 */
         }
 
         table.ad-table { 
@@ -259,14 +260,15 @@
             font-size: 12.5px;
             table-layout: fixed;
             word-wrap: break-word;
-            border: 1px solid var(--border-color);
+            border: 1px solid var(--border-color) !important; /* 強制外框顯影 */
             border-radius: 6px;
             overflow: hidden;
         }
 
+        /* 🛡️ 核心修復：給所有單元格強加 1px 完整全邊框，確保左、右、底線 100% 顯影！ */
         table.ad-table th, table.ad-table td { 
-            border: 1px solid var(--border-color); 
-            padding: 8px 12px; 
+            border: 1px solid var(--border-color) !important; 
+            padding: 9px 12px; 
             vertical-align: middle; 
             text-align: left; 
             line-height: 1.5;
@@ -402,6 +404,11 @@
             .description-scroll-box { max-height: none !important; overflow-y: visible !important; border: none !important; padding: 0 !important; }
             .scroll-tip-badge { display: none !important; }
             .header-flex-box { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            table.ad-table th, table.ad-table td { 
+                border: 1px solid var(--border-color) !important; 
+                -webkit-print-color-adjust: exact; 
+                print-color-adjust: exact; 
+            }
             table.ad-table th { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
             .footer-image-box { width: calc(100% + 36mm) !important; margin-left: -18mm !important; }
             .last-page-footer-box { width: calc(100% + 36mm) !important; margin-left: -18mm !important; }
